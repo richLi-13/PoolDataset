@@ -1,0 +1,144 @@
+pot yellow ball into top_left pocket
+pot yellow ball into top_right pocket
+pot yellow ball into middle_left pocket
+pot yellow ball into middle_right pocket
+pot yellow ball into bottom_left pocket
+pot yellow ball into bottom_right pocket
+pot blue ball into top_left pocket
+pot blue ball into top_right pocket
+pot blue ball into middle_left pocket
+pot blue ball into middle_right pocket
+pot blue ball into bottom_left pocket
+pot blue ball into bottom_right pocket
+pot red ball into top_left pocket
+pot red ball into top_right pocket
+pot red ball into middle_left pocket
+pot red ball into middle_right pocket
+pot red ball into bottom_left pocket
+pot red ball into bottom_right pocket
+pot purple ball into top_left pocket
+pot purple ball into top_right pocket
+pot purple ball into middle_left pocket
+pot purple ball into middle_right pocket
+pot purple ball into bottom_left pocket
+pot purple ball into bottom_right pocket
+pot orange ball into top_left pocket
+pot orange ball into top_right pocket
+pot orange ball into middle_left pocket
+pot orange ball into middle_right pocket
+pot orange ball into bottom_left pocket
+pot orange ball into bottom_right pocket
+pot green ball into top_left pocket
+pot green ball into top_right pocket
+pot green ball into middle_left pocket
+pot green ball into middle_right pocket
+pot green ball into bottom_left pocket
+pot green ball into bottom_right pocket
+pot maroon ball into top_left pocket
+pot maroon ball into top_right pocket
+pot maroon ball into middle_left pocket
+pot maroon ball into middle_right pocket
+pot maroon ball into bottom_left pocket
+pot maroon ball into bottom_right pocket
+pot black ball into top_left pocket
+pot black ball into top_right pocket
+pot black ball into middle_left pocket
+pot black ball into middle_right pocket
+pot black ball into bottom_left pocket
+pot black ball into bottom_right pocket
+pot yellow ball into top_left pocket directly
+pot yellow ball into top_right pocket directly
+pot yellow ball into middle_left pocket directly
+pot yellow ball into middle_right pocket directly
+pot yellow ball into bottom_left pocket directly
+pot yellow ball into bottom_right pocket directly
+pot blue ball into top_left pocket directly
+pot blue ball into top_right pocket directly
+pot blue ball into middle_left pocket directly
+pot blue ball into middle_right pocket directly
+pot blue ball into bottom_left pocket directly
+pot blue ball into bottom_right pocket directly
+pot red ball into top_left pocket directly
+pot red ball into top_right pocket directly
+pot red ball into middle_left pocket directly
+pot red ball into middle_right pocket directly
+pot red ball into bottom_left pocket directly
+pot red ball into bottom_right pocket directly
+pot purple ball into top_left pocket directly
+pot purple ball into top_right pocket directly
+pot purple ball into middle_left pocket directly
+pot purple ball into middle_right pocket directly
+pot purple ball into bottom_left pocket directly
+pot purple ball into bottom_right pocket directly
+pot orange ball into top_left pocket directly
+pot orange ball into top_right pocket directly
+pot orange ball into middle_left pocket directly
+pot orange ball into middle_right pocket directly
+pot orange ball into bottom_left pocket directly
+pot orange ball into bottom_right pocket directly
+pot green ball into top_left pocket directly
+pot green ball into top_right pocket directly
+pot green ball into middle_left pocket directly
+pot green ball into middle_right pocket directly
+pot green ball into bottom_left pocket directly
+pot green ball into bottom_right pocket directly
+pot maroon ball into top_left pocket directly
+pot maroon ball into top_right pocket directly
+pot maroon ball into middle_left pocket directly
+pot maroon ball into middle_right pocket directly
+pot maroon ball into bottom_left pocket directly
+pot maroon ball into bottom_right pocket directly
+pot black ball into top_left pocket directly
+pot black ball into top_right pocket directly
+pot black ball into middle_left pocket directly
+pot black ball into middle_right pocket directly
+pot black ball into bottom_left pocket directly
+pot black ball into bottom_right pocket directly
+pot yellow ball into top_left pocket with a bank shot
+pot yellow ball into top_right pocket with a bank shot
+pot yellow ball into middle_left pocket with a bank shot
+pot yellow ball into middle_right pocket with a bank shot
+pot yellow ball into bottom_left pocket with a bank shot
+pot yellow ball into bottom_right pocket with a bank shot
+pot blue ball into top_left pocket with a bank shot
+pot blue ball into top_right pocket with a bank shot
+pot blue ball into middle_left pocket with a bank shot
+pot blue ball into middle_right pocket with a bank shot
+pot blue ball into bottom_left pocket with a bank shot
+pot blue ball into bottom_right pocket with a bank shot
+pot red ball into top_left pocket with a bank shot
+pot red ball into top_right pocket with a bank shot
+pot red ball into middle_left pocket with a bank shot
+pot red ball into middle_right pocket with a bank shot
+pot red ball into bottom_left pocket with a bank shot
+pot red ball into bottom_right pocket with a bank shot
+pot purple ball into top_left pocket with a bank shot
+pot purple ball into top_right pocket with a bank shot
+pot purple ball into middle_left pocket with a bank shot
+pot purple ball into middle_right pocket with a bank shot
+pot purple ball into bottom_left pocket with a bank shot
+pot purple ball into bottom_right pocket with a bank shot
+pot orange ball into top_left pocket with a bank shot
+pot orange ball into top_right pocket with a bank shot
+pot orange ball into middle_left pocket with a bank shot
+pot orange ball into middle_right pocket with a bank shot
+pot orange ball into bottom_left pocket with a bank shot
+pot orange ball into bottom_right pocket with a bank shot
+pot green ball into top_left pocket with a bank shot
+pot green ball into top_right pocket with a bank shot
+pot green ball into middle_left pocket with a bank shot
+pot green ball into middle_right pocket with a bank shot
+pot green ball into bottom_left pocket with a bank shot
+pot green ball into bottom_right pocket with a bank shot
+pot maroon ball into top_left pocket with a bank shot
+pot maroon ball into top_right pocket with a bank shot
+pot maroon ball into middle_left pocket with a bank shot
+pot maroon ball into middle_right pocket with a bank shot
+pot maroon ball into bottom_left pocket with a bank shot
+pot maroon ball into bottom_right pocket with a bank shot
+pot black ball into top_left pocket with a bank shot
+pot black ball into top_right pocket with a bank shot
+pot black ball into middle_left pocket with a bank shot
+pot black ball into middle_right pocket with a bank shot
+pot black ball into bottom_left pocket with a bank shot
+pot black ball into bottom_right pocket with a bank shot
