@@ -8,26 +8,26 @@ w = 1.9812 / 2
 l = 1.9812
 R = 0.028575
 epsilon = 0.001
+cushion_width = 2 * 2.54 / 100
 
 
-# 如果是78*39，则是台球桌的外围尺寸，所以这里w和l表示的是外围尺寸，这么算每个袋口中心都会有坐标
 def get_pos(w, l, R):
-    return (w - 2 * R) * np.random.rand() + R, (l - 2 * R) * np.random.rand() + R
+    return (w - 3 * R) * np.random.rand() + 1.5 * R, (l - 3 * R) * np.random.rand() + 1.5 * R
 
-def gen_state_dataset(num_of_states, num_of_balls, w, l, R): #cnt includes the cue ball
+def gen_state_dataset(num_of_states, balls, num_of_balls_in_state,  w, l, R): #cnt includes the cue ball
     state_dataset = []
-    if num_of_balls > len(balls) + 1 or num_of_balls < 2:
+    if num_of_balls_in_state > len(balls) + 1 or num_of_balls_in_state < 2:
         raise ValueError("the number of color balls should be between 2 and the total number " + str(len(balls)) + ".")
     else:
         for _ in range(num_of_states):
             state = []
 
             # cue ball
-            state.append(("cue ball", get_pos(w, l, R)))
+            state.append(("cue", get_pos(w, l, R)))
 
             # color balls
             color_balls = balls.copy() # python这里这种赋值也是地址赋值，所以要用copy
-            for i in range(num_of_balls - 1):
+            for i in range(num_of_balls_in_state - 1):
                 ball_pos = get_pos(w, l, R)
 
                 # if overlapped: regenerate
@@ -45,7 +45,7 @@ def gen_state_dataset(num_of_states, num_of_balls, w, l, R): #cnt includes the c
         
         return state_dataset
 
-gen_state_dataset(10000, 3, w, l, R)
+# gen_state_dataset(100, balls, 4, w, l, R)
 
 
         

@@ -32,28 +32,30 @@ w = 1.9812 / 2
 l = 1.9812
 R = 0.028575
 corner_jaw_radius = 0.0419 / 2
+corner_pocket_width = 0.118
 side_pocket_width = 0.137
 side_jaw_radius = 0.0159 / 2
 cushion_width = 2 * 2.54 / 100
 
 epsilon = 0.001
 
-pocket_positions = {
-    'top_left': (0, 1.27),
-    'top_right': (2.54, 1.27),
-    'bottom_left': (0, 0),
-    'bottom_right': (2.54, 0),
-    'middle_left': (0, 0.635),
-    'middle_right': (2.54, 0.635)
-}
-
 dataset = []
 
-def which_jaw(pocket):
+def get_pocket_pos(w=1.9812 / 2, l=1.9812):
+    return {
+        'top_left': (0, l),
+        'top_right': (w, l),
+        'bottom_left': (0, 0),
+        'bottom_right': (w, 0),
+        'middle_left': (0, l / 2),
+        'middle_right': (w, l / 2)
+    }
+
+def which_pocket_width(pocket, corner_pocket_width=corner_pocket_width, side_pocket_width=side_pocket_width):
     if pocket in ['top_left', 'top_right', 'bottom_left', 'bottom_right']:
-        return corner_jaw_radius
+        return corner_pocket_width
     else:
-        return side_jaw_radius
+        return side_pocket_width
 
 
 def dis(p1, p2):
@@ -73,14 +75,18 @@ def get_intersec_y(p1, p2, y):
     b = p1[0] - k * p1[1]
     return k * y + b, y
 
+def get_angle(v1, v2):
+    # get the angle between two vectors
+    cos_theta = np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
+    return np.degrees(np.arccos(cos_theta))
 
-def get_bank_pos(ball_pos, target_pocket, cue_ball=False, cue_ball_pos=None):
-    # sym_pos = []
+
+def get_bank_pos(ball_pos, target_pocket, cue_ball=False, cue_ball_pos=None, w=w, l=l):
     bank_pos = []
-    xl = cushion_width
-    xr = w - cushion_width
-    yt = l - cushion_width
-    yb = cushion_width
+    xl = 0
+    xr = w
+    yt = l
+    yb = 0
 
     # 看是（1）翻袋，与白球连线取bank_pos；（2）非直接击打，与目标袋连线取bank_pos
     # bank shot, cue ball touches the cushion
@@ -131,7 +137,7 @@ def get_bank_pos(ball_pos, target_pocket, cue_ball=False, cue_ball_pos=None):
 
     # indirect shot, target ball touches the cushion (only once)
     else:
-        target_pocket_pos = pocket_positions[target_pocket]
+        target_pocket_pos = get_pocket_pos(w=w, l=l)[target_pocket]
 
         # 对目标袋反向取对称点，然后与目标袋连线取bank_pos
         if (target_pocket == 'top_left'):
@@ -185,14 +191,16 @@ def is_ball_in_path(start, end, ball, tolerance=epsilon):
     return np.sqrt(d1**2 - (2*R)**2) + np.sqrt(d2**2 - (2*R)**2) <= d3 + tolerance * R
 
 
-def check_feasi_sig(state, goal):
+def check_feasi_sig(state, goal, R=R, epsilon=epsilon, w=w, l=l, 
+                    corner_pocket_width=corner_pocket_width, side_pocket_width=side_pocket_width):
     # check if the goal is feasible given the state
+
     cue_ball_pos = state[0][1]
 
     parts = goal.split()
     target_ball_color = parts[1]
     target_pocket = parts[4]
-    target_pocket_pos = pocket_positions[target_pocket]
+    target_pocket_pos = get_pocket_pos(w=w, l=l)[target_pocket]
 
     # 1. check if target ball in state
     for ball_color, ball_pos in state[1:]:
@@ -203,8 +211,8 @@ def check_feasi_sig(state, goal):
     else:    
         return False 
 
-    # 2. check whether the difference between R and jaw radius is bigger than tolerance  
-    if R - which_jaw(target_pocket) <= epsilon * R:
+    # 2. check whether the difference between R and pocket width is bigger than tolerance  
+    if which_pocket_width(target_pocket, corner_pocket_width=corner_pocket_width, side_pocket_width=side_pocket_width) / 2 - R <= epsilon * R:
         return False   
     
     # 3. calculate the ghost ball position
@@ -214,22 +222,23 @@ def check_feasi_sig(state, goal):
     ghost_ball_pos = (ghost_ball_x, ghost_ball_y)
 
 
-    if "directly" in goal:
+    if "directly" in goal and "indirectly" not in goal:
         # a direct shot
 
         # (1) check the angle between the line connecting the centre of the cue ball to the ghost ball
         #     and the line connecting the centre of the target ball to the target pocket
         cue_to_ghost = np.array(ghost_ball_pos) - np.array(cue_ball_pos)
         # target_to_pocket = np.array(target_pocket_pos) - np.array(target_ball_pos)
-        angle = np.degrees(np.arctan2(cue_to_ghost[1], cue_to_ghost[0]) - np.arctan2(target_to_pocket[1], target_to_pocket[0]))
-        if angle > 90:
+        angle = get_angle(cue_to_ghost, target_to_pocket)
+        if angle > 75:
             return False
+
 
         # (2) check if there's no other ball (** except the target ball **) in the path 
         #     from the cue ball to the ghost ball, and from the target ball to the target pocket
         for ball_color, ball_pos in state[1:]:
             if ball_color != target_ball_color and (is_ball_in_path(cue_ball_pos, ghost_ball_pos, ball_pos) 
-                                                    or is_ball_in_path(target_ball_pos, target_pocket_pos, ball_pos)):
+                                                or is_ball_in_path(target_ball_pos, target_pocket_pos, ball_pos)):
                 return False
         
         return True
@@ -237,7 +246,7 @@ def check_feasi_sig(state, goal):
         
     elif "bank" in goal:
         # a bank shot, cue ball touches the cushion
-        bank_pos = get_bank_pos(ghost_ball_pos, target_pocket, cue_ball=True, cue_ball_pos=cue_ball_pos)
+        bank_pos = get_bank_pos(ghost_ball_pos, target_pocket, cue_ball=True, cue_ball_pos=cue_ball_pos, w=w, l=l)
 
         for pos in bank_pos:
 
@@ -252,8 +261,8 @@ def check_feasi_sig(state, goal):
         #     and the line connecting the centre of the target ball to the target pocket 
             bank_to_ghost = np.array(ghost_ball_pos) - np.array(pos)
             # target_to_pocket = np.array(target_pocket_pos) - np.array(target_ball_pos)
-            angle = np.degrees(np.arctan2(bank_to_ghost[1], bank_to_ghost[0]) - np.arctan2(target_to_pocket[1], target_to_pocket[0]))
-            if angle > 90:
+            angle = get_angle(bank_to_ghost, target_to_pocket)
+            if angle > 75:
                 bank_pos.remove(pos) 
                 break
         
@@ -272,10 +281,8 @@ def check_feasi_sig(state, goal):
         return True
 
     else:
-        print("check indirectly")
-
         # an indirect shot, target ball touches the cushion (only once)
-        bank_pos = get_bank_pos(target_ball_pos, target_pocket)
+        bank_pos = get_bank_pos(target_ball_pos, target_pocket, w=w, l=l)
 
         for pos in bank_pos:
 
@@ -290,8 +297,8 @@ def check_feasi_sig(state, goal):
         #     and the line connecting cue ball to the target ball (又一个可能的误差；这里应该是白球到假想球)
             cue_to_target = np.array(target_ball_pos) - np.array(cue_ball_pos)
             target_to_bank = np.array(pos) - np.array(target_ball_pos)
-            angle = np.degrees(np.arctan2(cue_to_target[1], cue_to_target[0]) - np.arctan2(target_to_bank[1], target_to_bank[0]))
-            if angle > 90:
+            angle = get_angle(cue_to_target, target_to_bank)
+            if angle > 75:
                 bank_pos.remove(pos)     
                 break
 
@@ -311,9 +318,8 @@ def check_feasi_sig(state, goal):
 
         if bank_pos == []:
             return False
-
+        
         return True
-
 
 
 def check_feasi(times):
@@ -339,6 +345,6 @@ def check_feasi(times):
         for data in dataset:
             f.write(str(data) + "\n")    
 
-check_feasi(100)
+# check_feasi(100)
 
 

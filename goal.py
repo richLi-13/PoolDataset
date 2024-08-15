@@ -1,14 +1,15 @@
 
 # This script generates a goal dataset for the pool game.
 
-balls = ["yellow", "blue", "red", "purple", "orange", "green", "maroon", "black"]
+balls = ["red", "yellow", "blue"]
+# balls = ["yellow", "blue", "red", "purple", "orange", "green", "maroon", "black"]
 pockets = ["top_left", "top_right", "middle_left", "middle_right", "bottom_left", "bottom_right"]
 
 def gen_goal_dataset(balls, pockets):
     goal_dataset = [] 
     for X in balls:
         for Y in pockets:
-            goal_dataset.append("pot " + str(X) + " ball into " + Y + " pocket")
+            goal_dataset.append("pot " + str(X) + " ball into " + Y + " pocket indirectly")
 
     for X in balls:
         for Y in pockets:
@@ -24,4 +25,4 @@ def gen_goal_dataset(balls, pockets):
     return goal_dataset
     
 
-gen_goal_dataset(balls, pockets)
+# gen_goal_dataset(balls, pockets)
