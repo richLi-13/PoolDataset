@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
 
     with open("new_run_indices.txt", "r") as f:
-        idx = [int(line.strip()) for line in f.readlines()][-700:]
+        idx = [int(line.strip()) for line in f.readlines()][-1000:]
     
     sampled_data = [(i, dataset[i]) for i in idx]
     
