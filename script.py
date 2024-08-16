@@ -2,14 +2,12 @@
 # This script is used to combine all the other code together with everything needed as the input.
 
 import random
-import json
 from pool import Pool
 from utils import *
 from pool_solver import PoolSolver
 from state import gen_state_dataset
 from goal import gen_goal_dataset
 from check_feasibility import check_feasi_sig
-from draw import draw, drawall
 
 def translate_pocket_name(pocket_name: str) -> str:
     pocket_translation = {

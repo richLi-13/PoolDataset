@@ -1,9 +1,22 @@
+import random
+from summarize import get_zero_rate
 
-index = 1
-data = 2
-success_times = 3
-iter_times = 4
-success_rate = success_times / iter_times
 
-with open("success_rate_new.txt", "a") as f:
-    f.write(f"{index, data}, {success_times} / {iter_times} = {success_rate}\n")
+idx = []
+
+
+with open("sample_itr100_stp100.txt", "r") as f:
+    dataset = [line.strip() for line in f.readlines()]
+
+for data in dataset:
+    index = int(data.split(',')[0].strip('('))
+    idx.append(index)
+
+with open("sample_indices.txt", "w") as f:
+    for index in idx:
+        f.write(f"{index}\n")
+
+
+
+print(get_zero_rate(dataset))
+

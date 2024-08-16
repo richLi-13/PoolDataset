@@ -1,9 +1,9 @@
 import random
-from multiprocessing import Pool, Lock, cpu_count, Manager, Queue
+from multiprocessing import Pool,  cpu_count, Manager, Queue
 from script import evaluate_one
 
-output_file = 'success_rate_new.txt'
-iter_times = 10
+output_file = 'sample_itr20_stp100.txt'
+iter_times = 20
 
 def process_data(index, data, queue):
     print(f"Current index: {index}")
@@ -32,11 +32,10 @@ if __name__ == "__main__":
     dataset = tuple([eval(data) for data in dataset])
 
 
-    with open("new_run_indices.txt", "r") as f:
+    with open("sample_indices.txt", "r") as f:
         idx = [int(line.strip()) for line in f.readlines()]
-    
-    sampled_data = [(i, dataset[i]) for i in idx]
 
+    sampled_data = [(i, dataset[i]) for i in idx]
 
     num_processors = cpu_count()
     manager = Manager()

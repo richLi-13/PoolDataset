@@ -4,7 +4,7 @@
 
 from pool import Pool
 from utils import *
-import torch, PIL, os
+import os
 from typing import List, Dict, Tuple
 
 from bayes_opt import BayesianOptimization, SequentialDomainReductionTransformer, UtilityFunction
@@ -24,7 +24,6 @@ class Optimisers:
     ###    - Bayesian opt search steps to perform
     INITIAL_RANDOM = 100
     SEARCH_STEPS = 100
-
 
 
     BAYES_OPTIMIZER = None

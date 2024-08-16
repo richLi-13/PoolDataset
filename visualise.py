@@ -1,4 +1,3 @@
-import json
 from utils import State, Event
 from pool import Pool
 import pooltool as pt
