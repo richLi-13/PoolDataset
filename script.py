@@ -115,6 +115,27 @@ def evaluate(file):
     print(f"Success Rate: {success} / {len(dataset)} = {success / len(dataset)}")
 
 
+def evaluate_ever_success(data, iter_times):
+    psolver = PoolSolver()
+    pos_state, goal = data
+    positions_dict = {key: list(pos) for key, pos in pos_state}
+    state = State(positions=positions_dict)
+
+    success = False
+    for i in range(iter_times):
+        print(f"Iterating {i + 1} time(s):")
+        params, _, new_events, rating, _ = psolver.get_shot(state, splitevents(goal))
+        if rating == 1.0:
+            success = True
+            print(f"Success at {pos_state} with goal {goal}, the best shot is {new_events}, with params {params}")
+            break
+        else:
+            print(f"Failed\n")
+    
+    print(f"Success: {success}\n")    
+    return success
+
+
 def evaluate_one(data, iter_times):
     psolver = PoolSolver()
     pos_state, goal = data

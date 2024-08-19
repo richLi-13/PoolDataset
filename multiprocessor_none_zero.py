@@ -1,18 +1,17 @@
-import random
-from multiprocessing import Pool, Lock, cpu_count, Manager, Queue
-from script import evaluate_one
+from multiprocessing import Pool,  cpu_count, Manager
+from script import evaluate_ever_success
 
-output_file = 'success_rate_new.txt'
-iter_times = 10
+output_file = 'sample_itr30_stp100.txt'
+iter_times = 30
 
 def process_data(index, data, queue):
     print(f"Current index: {index}")
-    success_times, success_rate = evaluate_one(data, iter_times)
+    success = evaluate_ever_success(data, iter_times)
 
     # 将结果放入队列中
-    queue.put((index, data, success_times, success_rate))
+    queue.put((index, data, success))
 
-    return (index, success_times, success_rate)
+    return (index, success)
 
 
 def listener(queue, output_file):
@@ -21,8 +20,8 @@ def listener(queue, output_file):
             m = queue.get()
             if m == 'kill':
                 break
-            index, data, success_times, success_rate = m
-            f.write(f"{index, data}, Success Rate: {success_times} / {iter_times} = {success_rate}\n")
+            index, data, success = m
+            f.write(f"{index, data}, Success: {success}\n")
             f.flush()  # 确保数据立即写入磁盘
 
 
@@ -32,13 +31,10 @@ if __name__ == "__main__":
     dataset = tuple([eval(data) for data in dataset])
 
 
-    # with open("new_run_indices.txt", "r") as f:
-    #     idx = [int(line.strip()) for line in f.readlines()]
+    with open("sample_indices_500.txt", "r") as f:
+        idx = [int(line.strip()) for line in f.readlines()]
 
-    idx = random.sample(range(len(dataset)), 5000)
-    
     sampled_data = [(i, dataset[i]) for i in idx]
-
 
     num_processors = cpu_count()
     manager = Manager()
