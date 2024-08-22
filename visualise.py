@@ -49,7 +49,7 @@ def visualise(file, index=-1):
             p.from_state(state)
             p.visualise()
     
-visualise("feasible_dataset_new.txt", 4)
+visualise("feasible_dataset_new.txt", 10305)
 
 
 

@@ -1,8 +1,8 @@
 from multiprocessing import Pool,  cpu_count, Manager
 from script import evaluate_ever_success
 
-output_file = 'sample_itr30_stp100.txt'
-iter_times = 30
+output_file = 'sample_itr20_stp100.txt'
+iter_times = 20
 
 def process_data(index, data, queue):
     print(f"Current index: {index}")
