@@ -133,7 +133,7 @@ def show_proportion():
     plt.show()
 
 def show_trends_fixed_stps():
-    percentage = [0.498, 0.41, 0.3954, 0.39, 0.35]
+    percentage = [0.498, 0.432, 0.388, 0.38, 0.35]
     iter_times = [10, 20, 30, 40, 50]
 
     plt.figure(figsize=(10, 5))
@@ -142,26 +142,27 @@ def show_trends_fixed_stps():
     plt.ylabel('Percentage of Zero Success Rate')
     plt.title('Percentage of Zero Success Rate over iter_times with 100 steps')
     plt.xticks(iter_times)
+
     plt.savefig('Figure 11. Change Iter_Times.pdf')
     plt.show()
 
 def show_trends_fixed_itr():
-    percentage = [0.498, 0.484, 0.42, 0.39, 0.3897]
+    percentage = [0.498, 0.484, 0.4448, 0.4209, 0.3897]
     search_steps = [100, 150, 200, 250, 300]
 
     plt.figure(figsize=(10, 5))
     plt.plot(search_steps, percentage, marker='o')
-    plt.xlabel('Iteration Times')
+    plt.xlabel('Search Steps')
     plt.ylabel('Percentage of Zero Success Rate')
     plt.title('Percentage of Zero Success Rate over search steps with 10 iterations')
     plt.xticks(search_steps)
     plt.savefig('Figure 12. Change Search_Steps.pdf')
     plt.show()
 
-print(get_zero_rate(10, 100))
-# print(get_failure_rate(10, 250))
+# print(get_zero_rate(10, 100))
+# print(get_failure_rate(20, 100))
 # show_proportion()
-# show_trends_fixed_stps()
+show_trends_fixed_stps()
 # show_trends_fixed_itr()
 
 

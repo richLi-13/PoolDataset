@@ -192,7 +192,7 @@ side_jaw_radius = 0.0159 / 2
 cushion_width = 2 * 2.54 / 100
 
 
-# bigscript(20000, 20000, balls, pockets, 4, w, l, R, epsilon, corner_pocket_width, side_pocket_width)
+bigscript(20000, 20000, balls, pockets, 4, w, l, R, epsilon, corner_pocket_width, side_pocket_width)
 
 # drawall("feasible_dataset_new.txt", 1)
 
